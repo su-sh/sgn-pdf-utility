@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/sgn-pdf-utility/static/css/main.e6c13ad2.css",
+    "main.js": "/sgn-pdf-utility/static/js/main.626ac187.js",
+    "static/js/787.17faca6f.chunk.js": "/sgn-pdf-utility/static/js/787.17faca6f.chunk.js",
+    "index.html": "/sgn-pdf-utility/index.html",
+    "main.e6c13ad2.css.map": "/sgn-pdf-utility/static/css/main.e6c13ad2.css.map",
+    "main.626ac187.js.map": "/sgn-pdf-utility/static/js/main.626ac187.js.map",
+    "787.17faca6f.chunk.js.map": "/sgn-pdf-utility/static/js/787.17faca6f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.626ac187.js"
+  ]
+}
