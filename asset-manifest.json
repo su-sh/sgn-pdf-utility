@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/sgn-pdf-utility/static/css/main.97e29221.css",
-    "main.js": "/sgn-pdf-utility/static/js/main.19a4a9a6.js",
+    "main.js": "/sgn-pdf-utility/static/js/main.4b35f703.js",
     "static/js/787.17faca6f.chunk.js": "/sgn-pdf-utility/static/js/787.17faca6f.chunk.js",
     "index.html": "/sgn-pdf-utility/index.html",
     "main.97e29221.css.map": "/sgn-pdf-utility/static/css/main.97e29221.css.map",
-    "main.19a4a9a6.js.map": "/sgn-pdf-utility/static/js/main.19a4a9a6.js.map",
+    "main.4b35f703.js.map": "/sgn-pdf-utility/static/js/main.4b35f703.js.map",
     "787.17faca6f.chunk.js.map": "/sgn-pdf-utility/static/js/787.17faca6f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.97e29221.css",
-    "static/js/main.19a4a9a6.js"
+    "static/js/main.4b35f703.js"
   ]
 }
