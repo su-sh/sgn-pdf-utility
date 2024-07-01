@@ -51,7 +51,7 @@ function App() {
       <div className="file-inputs">
         <div className="file-input">
           <div className="file-name">
-            Base PDF (i.e. Empty CMS-1500 Form PDF):{' '}
+            Base PDF (i.e. Empty CMS-1500/UB-04 Form PDF):{' '}
             {basePdf ? basePdf.name : 'No file selected'}
           </div>
           <input type="file" accept=".pdf" onChange={handleBaseFileChange} />
@@ -59,7 +59,7 @@ function App() {
 
         <div className="file-input">
           <div className="file-name">
-            Overlay PDF (i.e. CMS 1500 Form Data PDF):{' '}
+            Overlay PDF (i.e. PM System Sample PDF):{' '}
             {overlayPdf ? overlayPdf.name : 'No file selected'}
           </div>
           <input type="file" accept=".pdf" onChange={handleOverlayFileChange} />
