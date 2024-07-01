@@ -20,44 +20,6 @@ export const mergePDFs = async (pdfFiles) => {
     return new Blob([mergedPdfBytes], { type: "application/pdf" });
 };
 
-// export const overlayPDFs = async (basePdfFile, overlayPdfFile, baseOffsets, overlayOffsets) => {
-//     const basePdfBytes = await basePdfFile.arrayBuffer();
-//     const overlayPdfBytes = await overlayPdfFile.arrayBuffer();
-
-//     const basePdfDoc = await PDFDocument.load(basePdfBytes);
-//     const overlayPdfDoc = await PDFDocument.load(overlayPdfBytes);
-
-//     const basePages = basePdfDoc.getPages();
-//     const overlayPages = overlayPdfDoc.getPages();
-
-//     if (basePages.length === 0 || overlayPages.length === 0) {
-//         throw new Error('One of the PDFs does not have pages.');
-//     }
-
-//     const baseSize = basePages[0].getSize();
-
-//     const newPage = basePdfDoc.addPage([baseSize.width, baseSize.height]);
-
-//     const embeddedBasePage = await basePdfDoc.embedPage(basePages[0]);
-//     const embeddedOverlayPage = await basePdfDoc.embedPage(overlayPages[0]);
-
-//     newPage.drawPage(embeddedBasePage, {
-//         x: baseOffsets.x,
-//         y: baseOffsets.y
-//     });
-
-//     newPage.drawPage(embeddedOverlayPage, {
-//         x: overlayOffsets.x,
-//         y: overlayOffsets.y
-//     });
-
-//     basePdfDoc.removePage(0);
-
-//     const mergedPdfBytes = await basePdfDoc.save();
-//     return new Blob([mergedPdfBytes], { type: 'application/pdf' });
-// };
-
-
 export const overlayPDFs = async (basePdfFile, overlayPdfFile, baseOffsets, overlayOffsets) => {
     const basePdfBytes = await basePdfFile.arrayBuffer();
     const overlayPdfBytes = await overlayPdfFile.arrayBuffer();
