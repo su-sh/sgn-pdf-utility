@@ -1,20 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
+
+import useDebounce from './hooks/useDebounce';
+
 import { overlayPDFs } from './utils/pdf';
-function useDebounce(value, delay) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-
-  return debouncedValue;
-}
+import './App.css';
 
 function App() {
   const [basePdf, setBasePdf] = useState(null);
@@ -36,65 +26,130 @@ function App() {
 
   const handleOverlay = useCallback(async () => {
     if (basePdf && overlayPdf) {
-      const mergedBlob = await overlayPDFs(basePdf, overlayPdf, debouncedBaseOffsets, debouncedOverlayOffsets);
+      const mergedBlob = await overlayPDFs(
+        basePdf,
+        overlayPdf,
+        debouncedBaseOffsets,
+        debouncedOverlayOffsets
+      );
       setPreviewUrl(URL.createObjectURL(mergedBlob));
     }
   }, [basePdf, overlayPdf, debouncedBaseOffsets, debouncedOverlayOffsets]);
 
   useEffect(() => {
     handleOverlay();
-  }, [basePdf, overlayPdf, debouncedBaseOffsets, debouncedOverlayOffsets, handleOverlay]);
-
+  }, [
+    basePdf,
+    overlayPdf,
+    debouncedBaseOffsets,
+    debouncedOverlayOffsets,
+    handleOverlay,
+  ]);
 
   return (
     <div>
-      <input type="file" accept=".pdf" onChange={handleBaseFileChange} />
-      <input type="file" accept=".pdf" onChange={handleOverlayFileChange} />
+      <div className="file-inputs">
+        <div className="file-input">
+          <div className="file-name">
+            Base PDF (i.e. Empty CMS-1500 Form PDF):{' '}
+            {basePdf ? basePdf.name : 'No file selected'}
+          </div>
+          <input type="file" accept=".pdf" onChange={handleBaseFileChange} />
+        </div>
 
-      <div>
+        <div className="file-input">
+          <div className="file-name">
+            Overlay PDF (i.e. CMS 1500 Form Data PDF):{' '}
+            {overlayPdf ? overlayPdf.name : 'No file selected'}
+          </div>
+          <input type="file" accept=".pdf" onChange={handleOverlayFileChange} />
+        </div>
+      </div>
+
+      <div className="offset-controls">
         <h4>Base PDF Offsets</h4>
-        x: <input type="range" value={baseOffsets.x} min={-500} max={500} onChange={(e) => setBaseOffsets({ ...baseOffsets, x: +e.target.value })}
-          style={{
-            width: "500px"
-          }}
-          step={.1}
-        />
-        y: <input type="range" value={baseOffsets.y} min={-500} max={500} onChange={(e) => setBaseOffsets({ ...baseOffsets, y: +e.target.value })}
-          step={.1}
-          style={{
-            width: "500px"
-          }}
-
-
-        />
+        <div className="offset-control">
+          <div className="offset-input">
+            <span>
+              <label>Base PDF X Offset: </label>
+            </span>
+            <input
+              type="range"
+              value={baseOffsets.x}
+              min={-500}
+              max={500}
+              onChange={(e) =>
+                setBaseOffsets({ ...baseOffsets, x: +e.target.value })
+              }
+              step={0.1}
+              className="range-input"
+            />
+            <span className="offset-value">Value: {baseOffsets.x}</span>
+          </div>
+        </div>
+        <div className="offset-input">
+          <span>Base PDF Y Offset: </span>
+          <input
+            type="range"
+            value={baseOffsets.y}
+            min={-500}
+            max={500}
+            onChange={(e) =>
+              setBaseOffsets({ ...baseOffsets, y: +e.target.value })
+            }
+            step={0.1}
+            className="range-input"
+          />
+          <span className="offset-value">Value: {baseOffsets.y}</span>
+        </div>
       </div>
 
-      <div>
+      <div className="offset-controls">
         <h4>Overlay PDF Offsets</h4>
-        x: <input type="range" value={overlayOffsets.x} min={-500} max={500} onChange={(e) => setOverlayOffsets({ ...overlayOffsets, x: +e.target.value })} 
-          step={.1}
-
-          style={{
-            width: "500px"
-          }}
-
-        />
-        y: <input type="range" value={overlayOffsets.y} min={-500} max={500} onChange={(e) => setOverlayOffsets({ ...overlayOffsets, y: +e.target.value })} 
-          step={.1}
-
-          style={{
-            width: "500px"
-          }}
-
-        />
+        <div className="offset-input">
+          <span>Overlay PDF X Offset: </span>
+          <input
+            type="range"
+            value={overlayOffsets.x}
+            min={-500}
+            max={500}
+            onChange={(e) =>
+              setOverlayOffsets({ ...overlayOffsets, x: +e.target.value })
+            }
+            step={0.1}
+            className="range-input"
+          />
+          <span className="offset-value">Value: {overlayOffsets.x}</span>
+        </div>
+        <div className="offset-input">
+          <span>Overlay PDF Y Offset: </span>
+          <input
+            type="range"
+            value={overlayOffsets.y}
+            min={-500}
+            max={500}
+            onChange={(e) =>
+              setOverlayOffsets({ ...overlayOffsets, y: +e.target.value })
+            }
+            step={0.1}
+            className="range-input"
+          />
+          <span className="offset-value">Value: {overlayOffsets.y}</span>
+        </div>
       </div>
 
-      <button onClick={handleOverlay}>Overlay PDFs</button>
+      <button onClick={handleOverlay} className="overlay-button">
+        Overlay PDFs
+      </button>
 
       {previewUrl && (
-        <div style={{ marginTop: "20px" }}>
+        <div className="preview-container">
           <h4>PDF Preview:</h4>
-          <iframe src={previewUrl} title="PDF Preview" width="1200" height="1600" style={{ border: '1px solid black' }}></iframe>
+          <iframe
+            src={previewUrl}
+            title="PDF Preview"
+            className="pdf-preview"
+          ></iframe>
         </div>
       )}
     </div>
