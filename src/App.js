@@ -47,48 +47,44 @@ function App() {
   ]);
 
   return (
-    <div>
-      <div className="file-inputs">
-        <div className="file-input">
+    <div className="container mt-5">
+      <div className="row mb-3">
+        <div className="col">
           <div className="file-name">
             Base PDF (i.e. Empty CMS-1500/UB-04 Form PDF):{' '}
             {basePdf ? basePdf.name : 'No file selected'}
           </div>
-          <input type="file" accept=".pdf" onChange={handleBaseFileChange} />
+          <input type="file" accept=".pdf" onChange={handleBaseFileChange} className="form-control-file" />
         </div>
 
-        <div className="file-input">
+        <div className="col">
           <div className="file-name">
             Overlay PDF (i.e. PM System Sample PDF):{' '}
             {overlayPdf ? overlayPdf.name : 'No file selected'}
           </div>
-          <input type="file" accept=".pdf" onChange={handleOverlayFileChange} />
+          <input type="file" accept=".pdf" onChange={handleOverlayFileChange} className="form-control-file" />
         </div>
       </div>
 
-      <div className="offset-controls">
+      <div className="mb-3">
         <h4>Base PDF Offsets</h4>
-        <div className="offset-control">
-          <div className="offset-input">
-            <span>
-              <label>Base PDF X Offset: </label>
-            </span>
-            <input
-              type="range"
-              value={baseOffsets.x}
-              min={-500}
-              max={500}
-              onChange={(e) =>
-                setBaseOffsets({ ...baseOffsets, x: +e.target.value })
-              }
-              step={0.1}
-              className="range-input"
-            />
-            <span className="offset-value">Value: {baseOffsets.x}</span>
-          </div>
+        <div className="form-group">
+          <label>Base PDF X Offset: </label>
+          <input
+            type="range"
+            value={baseOffsets.x}
+            min={-500}
+            max={500}
+            onChange={(e) =>
+              setBaseOffsets({ ...baseOffsets, x: +e.target.value })
+            }
+            step={0.1}
+            className="form-control-range"
+          />
+          <span className="offset-value">Value: {baseOffsets.x}</span>
         </div>
-        <div className="offset-input">
-          <span>Base PDF Y Offset: </span>
+        <div className="form-group">
+          <label>Base PDF Y Offset: </label>
           <input
             type="range"
             value={baseOffsets.y}
@@ -98,16 +94,16 @@ function App() {
               setBaseOffsets({ ...baseOffsets, y: +e.target.value })
             }
             step={0.1}
-            className="range-input"
+            className="form-control-range"
           />
           <span className="offset-value">Value: {baseOffsets.y}</span>
         </div>
       </div>
 
-      <div className="offset-controls">
+      <div className="mb-3">
         <h4>Overlay PDF Offsets</h4>
-        <div className="offset-input">
-          <span>Overlay PDF X Offset: </span>
+        <div className="form-group">
+          <label>Overlay PDF X Offset: </label>
           <input
             type="range"
             value={overlayOffsets.x}
@@ -117,12 +113,12 @@ function App() {
               setOverlayOffsets({ ...overlayOffsets, x: +e.target.value })
             }
             step={0.1}
-            className="range-input"
+            className="form-control-range"
           />
           <span className="offset-value">Value: {overlayOffsets.x}</span>
         </div>
-        <div className="offset-input">
-          <span>Overlay PDF Y Offset: </span>
+        <div className="form-group">
+          <label>Overlay PDF Y Offset: </label>
           <input
             type="range"
             value={overlayOffsets.y}
@@ -132,18 +128,18 @@ function App() {
               setOverlayOffsets({ ...overlayOffsets, y: +e.target.value })
             }
             step={0.1}
-            className="range-input"
+            className="form-control-range"
           />
           <span className="offset-value">Value: {overlayOffsets.y}</span>
         </div>
       </div>
 
-      <button onClick={handleOverlay} className="overlay-button">
+      <button onClick={handleOverlay} className="btn btn-primary">
         Overlay PDFs
       </button>
 
       {previewUrl && (
-        <div className="preview-container">
+        <div className="mt-3">
           <h4>PDF Preview:</h4>
           <iframe
             src={previewUrl}
